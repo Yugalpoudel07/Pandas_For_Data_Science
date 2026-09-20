@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------
+# Project-specific
+# ---------------------------------------------------------------
+
+# Jupyter autosave copies
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Large raw dataset - download it from Kaggle, see README
+data/netflix_titles.csv
+
+# Files produced by running the notebooks
+data/netflix_clean.csv
+data/titanic_clean.csv
