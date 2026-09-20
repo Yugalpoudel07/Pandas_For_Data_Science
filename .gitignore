@@ -225,9 +225,10 @@ __marimo__/
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
 
-# Large raw dataset - download it from Kaggle, see README
-data/netflix_titles.csv
+# Netflix datasets are committed on purpose (~3 MB each) so the
+# Netflix_125_questions_workbook notebook runs straight after a clone:
+#   data/netflix_titles.csv  - raw Kaggle dataset
+#   data/netflix_clean.csv   - produced by the last cell of the workbook
 
 # Files produced by running the notebooks
-data/netflix_clean.csv
 data/titanic_clean.csv

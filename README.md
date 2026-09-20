@@ -9,7 +9,7 @@ All notebooks run top to bottom without errors and are committed **with their
 outputs**, so you can read them straight on GitHub without installing anything.
 
 ```
-13 notebooks · 485 code cells · 242 explanation cells · 3 datasets
+13 notebooks · 485 code cells · 244 explanation cells · 4 datasets
 ```
 
 ---
@@ -18,15 +18,17 @@ outputs**, so you can read them straight on GitHub without installing anything.
 
 ```
 Pandas_For_Data_Science/
-├── Notebook/          # all 13 notebooks
-├── data/              # all CSV files used by the notebooks
+├── Notebook/                          # notebooks 1–12, one topic each
+├── Netflix_125_questions_workbook/    # notebook 13, the capstone workbook
+├── data/                              # all CSV files used by the notebooks
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
-Notebooks read their data with a relative path — `pd.read_csv("../data/file.csv")` —
-so open Jupyter **from the repository root** (or from `Notebook/`) and everything works.
+Notebooks read their data with a relative path — `pd.read_csv("../data/file.csv")`.
+Both notebook folders sit **one level below the repository root**, so that same
+`../data/...` path works from either of them — nothing to change after cloning.
 
 ---
 
@@ -48,15 +50,17 @@ Read them in this order. Each one assumes the ones above it.
 | 10 | [`groupby.ipynb`](Notebook/groupby.ipynb) | **GroupBy** | split → apply → combine, `agg` with a list and a dict, two-column groups, `unstack`, `transform`, **25 practice questions** |
 | 11 | [`pandas_joins_simple.ipynb`](Notebook/pandas_joins_simple.ipynb) | **Joins** | `pd.merge` inner / left / right / outer, `left_on` & `right_on`, `suffixes`, `indicator`, `pd.concat` |
 | 12 | [`titanic_data_cleaning.ipynb`](Notebook/titanic_data_cleaning.ipynb) | **Data cleaning walkthrough** | missing values, dropping vs filling, duplicates, dtypes, outliers with the IQR rule, capping, text cleanup + 6 exercises |
-| 13 | [`netflix_125_question_workbook.ipynb`](Notebook/netflix_125_question_workbook.ipynb) | **125-question practice workbook** | everything above, applied end to end on the Netflix catalogue |
+| 13 | [`netflix_125_question_workbook.ipynb`](Netflix_125_questions_workbook/netflix_125_question_workbook.ipynb) | **125-question practice workbook** | everything above, applied end to end on the Netflix catalogue |
 
 ---
 
 ## The Netflix workbook
 
-`netflix_125_question_workbook.ipynb` is the capstone: **125 questions, all answered**,
-each with the pandas code and a short comment explaining *why* that code is the right
-tool.
+`Netflix_125_questions_workbook/netflix_125_question_workbook.ipynb` is the capstone:
+**125 questions, all answered**, each with the pandas code and a short comment
+explaining *why* that code is the right tool. It lives in its own folder because it is
+a workbook rather than a topic lesson. A few answers (for example Q9 and Q12 in
+Section A) are followed by a markdown cell that reads the output back in words.
 
 | Section | Topic | Questions |
 |---------|-------|-----------|
@@ -84,27 +88,18 @@ cell writes the cleaned result to `data/netflix_clean.csv`.
 | `data/titanic_dataset.csv` | 1,309 | notebooks 1, 6, 9, 12 | classic Titanic passenger list |
 | `data/data.csv` | 50 | notebook 2 | generated inside notebook 2 |
 | `data/nepali_data.csv` | 1,000 | notebooks 1, 6, 7 | generated inside notebook 2 (seeded, so it is reproducible) |
-| `data/netflix_titles.csv` | 8,807 | notebook 13 | **not committed — see below** |
+| `data/netflix_titles.csv` | 8,807 | notebook 13 | Kaggle — ["Netflix Movies and TV Shows"](https://www.kaggle.com/datasets/shivamb/netflix-shows) by Shivam Bansal |
+| `data/netflix_clean.csv` | 8,797 | — | written by the last cell of notebook 13 |
 
-### Getting `netflix_titles.csv`
+### About the Netflix files
 
-The Netflix file is ~3.4 MB, so it is kept out of the repository. Download it before
-running notebook 13:
+Both Netflix CSVs are **committed to the repository** (~3 MB each), so notebook 13
+runs straight after a clone — no Kaggle download needed. `netflix_clean.csv` is the
+cleaned output of the workbook and is kept in the repo so the result of the cleaning
+can be inspected without re-running all 125 cells.
 
-1. Go to the Kaggle dataset **"Netflix Movies and TV Shows"** by Shivam Bansal
-   → <https://www.kaggle.com/datasets/shivamb/netflix-shows>
-2. Download `netflix_titles.csv`
-3. Put it in the `data/` folder
-
-```
-data/netflix_titles.csv
-```
-
-The notebook already displays its outputs on GitHub, so you only need the file if you
-want to re-run the cells yourself.
-
-Files the notebooks *produce* — `data/netflix_clean.csv` and `data/titanic_clean.csv` —
-are also ignored by git, because running the notebooks regenerates them.
+`data/titanic_clean.csv` is still git-ignored, because running notebook 12
+regenerates it.
 
 ---
 
@@ -121,7 +116,8 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Then open anything in `Notebook/` and choose **Run All**.
+Then open anything in `Notebook/` — or the workbook in
+`Netflix_125_questions_workbook/` — and choose **Run All**.
 
 Tested with **Python 3.11** and **pandas 2.3**.
 
@@ -142,6 +138,8 @@ A cheat sheet of everything covered, so you don't have to hunt through the noteb
 | Numeric summary | `df.describe()` |
 | Text summary | `df.describe(include="object")` |
 | Missing per column | `df.isna().sum()` |
+| Worst columns first | `df.isna().sum().sort_values(ascending=False)` |
+| Real memory usage | `df.info(memory_usage="deep")` |
 | Duplicated rows | `df.duplicated().sum()` |
 
 ### Selecting
