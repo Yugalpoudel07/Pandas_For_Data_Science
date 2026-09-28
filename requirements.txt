@@ -3,3 +3,9 @@ pandas>=2.0,<3.0
 numpy>=1.24
 matplotlib>=3.7
 jupyter>=1.0
+
+# Used by the Data Manipulation and Coursera notebooks
+scipy>=1.10
+seaborn>=0.12
+lxml>=4.9
+numexpr>=2.8
